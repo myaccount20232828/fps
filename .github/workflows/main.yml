@@ -1,0 +1,17 @@
+name: Build
+on:
+  push:
+jobs:
+  Build:
+    runs-on: macos-latest
+    steps:
+     - uses: actions/checkout@v3
+     - name: Build
+       run: make TARGET=ios all
+     - name: Git Push
+       run: |
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git add output/
+            git commit
+            git push
